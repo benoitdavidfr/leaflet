@@ -1,0 +1,43 @@
+<!-- Test d'une carte Leaflet avec un GeoJSON lu en AJAX -->
+<!DOCTYPE HTML><html><head><title>MapTest</title><meta charset='UTF-8'>
+  <!-- meta nécessaire pour le mobile -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <!-- styles nécessaires pour le mobile -->
+  <link rel="stylesheet" href="llmap.css">
+  <!-- Leaflet download -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+    integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+    crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+    integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+    crossorigin=""></script>
+  <script src="leaflet-ajax.js"></script>
+</head>
+<body>
+  <div id='map' style='height: 100%; width: 100%'></div>
+  <script>
+    var map = L.map('map').setView([46.5, 3], 6); // view pour la zone
+    L.control.scale({position:'bottomleft', metric:true, imperial:false}).addTo(map);
+    var baseLayers = {
+      "Cartes IGN" : new L.TileLayer(
+        'https://igngp.geoapi.fr/tile.php/cartes/{z}/{x}/{y}.jpg',
+        { format:"image/jpeg","minZoom":0,"maxZoom":18, attribution:"&copy; <a href='http://www.ign.fr'>IGN</a>"}
+      )
+    };
+    map.addLayer(baseLayers["Cartes IGN"]);
+
+    var onEachFeature = function (feature, layer) {
+      layer.bindPopup('<pre>'+JSON.stringify(feature.properties,null,' ')+'</pre>');
+    }
+        
+    var overlays = {
+      "ZEE" : new L.GeoJSON.AJAX('https://benoitdavidfr.github.io/shomgt/france.geojson', {
+        style: { color: 'green'},
+        minZoom: 0, maxZoom: 18,
+        onEachFeature: onEachFeature
+      }),
+    };
+    L.control.layers(baseLayers, overlays).addTo(map);
+    
+  </script>
+</body></html>

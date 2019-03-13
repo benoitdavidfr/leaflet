@@ -1,0 +1,13 @@
+title: gexplor.fr/leaflet - mutualisation des plug-ins Leaflet et expérimentations sur Leaflet
+path: /gexplor/leaflet
+doc: |
+journal: |
+  13/3/2019 :
+    extension
+  18/3/2017 :
+    création
+phpScripts:
+phpIncludes:
+htmlFiles:
+  - /gexplor/leaflet/carteepsg4326.html
+  - /gexplor/leaflet/geojsonmap.html
