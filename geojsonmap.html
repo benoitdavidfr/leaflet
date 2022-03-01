@@ -20,7 +20,7 @@
     L.control.scale({position:'bottomleft', metric:true, imperial:false}).addTo(map);
     var baseLayers = {
       "Cartes IGN" : new L.TileLayer(
-        'https://igngp.geoapi.fr/tile.php/cartes/{z}/{x}/{y}.jpg',
+        'https://igngp.geoapi.fr/tile.php/plan-ignv2/{z}/{x}/{y}.jpg',
         { format:"image/jpeg","minZoom":0,"maxZoom":18, attribution:"&copy; <a href='http://www.ign.fr'>IGN</a>"}
       )
     };
